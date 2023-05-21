@@ -1,0 +1,19 @@
+问题1：java: 错误: 无效的源发行版：19
+解决1：在project struct把project的SDK更改为与之对应的jdk即可
+
+问题2：账号密码正确无法正常登录，debug发现获取
+原因2：代码漏写，未创建与数据库交互的dao层对象
+
+问题3：Configuration is still incorrect. Do you want to edit it again错误提示
+原因3：配置错误。在一个项目中，有多个模块时，导致运行混乱时会出现这种情况。主要是没有指定具体的运行项目报错。
+解决3：选择对应要执行的module就ok。
+
+问题4：登录成功时报500服务器内部错误
+原因4：将jdbc.properties文件放在了web目录下，导致读取资源时无法连接数据库
+解决4：将文件移到src下读取，（maybe换个路径也行吧）
+
+问题5：
+解决5：
+
+问题6：
+解决6：

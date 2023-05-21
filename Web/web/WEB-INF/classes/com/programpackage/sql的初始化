@@ -1,0 +1,41 @@
+DROP DATABASE IF EXISTS member_information;
+CREATE DATABASE member_information CHARACTER SET UTF8;
+use member_information;
+
+
+DROP TABLE IF EXISTS admin;
+CREATE TABLE admin(
+ id BIGINT(20) NOT NULL PRIMARY KEY auto_increment COMMENT '主键',
+ user_name VARCHAR(50) NOT NULL COMMENT '账号',
+ pwd VARCHAR(50) NOT NULL COMMENT '密码'
+--  PRIMARY KEY('id')
+) ENGINE=INNODB DEFAULT CHARSET = utf8 COMMENT '管理员信息';
+
+INSERT INTO admin(user_name,pwd) VALUES ('admin','123456');
+
+
+DROP TABLE IF EXISTS member;
+CREATE TABLE member(
+ id BIGINT(20) NOT NULL PRIMARY KEY auto_increment COMMENT '主键',
+ `name` VARCHAR(50) NOT NULL COMMENT '成员姓名',
+ `no` VARCHAR(50) NOT NULL COMMENT '学号',
+ birthday TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT  '生日'
+) ENGINE=INNODB DEFAULT CHARSET = utf8 COMMENT '成员信息';
+
+INSERT INTO member(name,no,birthday) VALUES ('李嘉富','20225958','2003/12/27');
+
+
+DROP TABLE IF EXISTS score;
+CREATE TABLE score(
+ id BIGINT(20) NOT NULL PRIMARY KEY auto_increment COMMENT '主键',
+ c_score DECIMAL(5,2) NOT NULL DEFAULT '0.00' NOT NULL COMMENT '语文成绩',
+ m_score DECIMAL(5,2) NOT NULL DEFAULT '0.00' NOT NULL COMMENT '数学成绩',
+ e_score DECIMAL(5,2) NOT NULL DEFAULT '0.00' NOT NULL COMMENT '英语成绩',
+ member_id BIGINT(20) COMMENT '外键：student表id'
+--  PRIMARY KEY('id')
+) ENGINE=INNODB DEFAULT CHARSET = utf8 COMMENT '学生成绩信息';
+
+INSERT INTO score(c_score,m_score,e_score) VALUES (99,88,77);
+
+
+ALTER TABLE score ADD CONSTRAINT fk_score_member FOREIGN KEY(member_id) REFERENCES member(id);
